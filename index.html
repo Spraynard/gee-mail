@@ -1,18 +1,50 @@
 <html>
 	<head>
 		<script src="js/mail-generator.js"></script>
+		<script src="jquery.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
-      window.onload = function(){
+    $(document).ready(function() {
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
-      };
+        $('<p>Hello</p>').appendTo('.date');
+        $('<p><b>Goodbye</b></p>').appendTo('.subject');
+ 		$('<p><b>This is the second date</b></p>').appendTo('.date');
+        /**
+        for (var i = 0; i < geemails.length; i++) {
+        	var date = $('<p class="geemailObj">geemails[i].date;
+ 	     	var subject = geemails[i].subject;
+        	var sender = geemails[i].sender;
+        	var body = geemails[i].body;
+        	date.addClass('date');
+        	subject.addClass('subject');
+        	sender.addClass('sender');
+        	body.addClass('body');
+        }
+        **/
+    });
     </script>
 	</head>
 	<body>
+		<header id="top Header"> 
+			<h1>Gee-Mail</h1>
+		</header>
 		<div class="container" id="main">
-			Build Me!
+			<div id="message">
+				<div class="date">
+					<p>Date</p>
+				</div>
+				<div class="subject">
+					<p>Subject</p>
+				</div>
+				<div id="sender">
+					<p>Sender</p>
+				</div>
+				<div id="body">
+					<p>Body</p>
+				</div>
+			</div>
+
 		</div>
 	</body>
 </html>
