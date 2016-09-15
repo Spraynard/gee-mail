@@ -1,0 +1,42 @@
+.container {
+}
+
+.row, .column {
+	box-sizing:border-box;
+}
+
+.row:before,
+.row:after {
+	content = "";
+	display: table;
+}
+
+.row:after {
+	clear:both;
+}
+
+.column {
+	text-align: center;
+	position: relative;
+	float: left;
+}
+
+.column + .column {
+	margin-left: 2.0%;
+}
+
+.column1 {
+	width: 25%;
+}
+
+.btnColumn {
+	width: 5%;
+}
+
+.column2 {
+	width: 100%;
+}
+
+#msgbody {
+	text-align:center;
+}

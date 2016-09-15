@@ -1,50 +1,62 @@
 <html>
 	<head>
 		<script src="js/mail-generator.js"></script>
-		<script src="jquery.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
     <script>
-    $(document).ready(function() {
+    window.onload = function() {
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        $('<p>Hello</p>').appendTo('.date');
-        $('<p><b>Goodbye</b></p>').appendTo('.subject');
- 		$('<p><b>This is the second date</b></p>').appendTo('.date');
-        /**
-        for (var i = 0; i < geemails.length; i++) {
-        	var date = $('<p class="geemailObj">geemails[i].date;
- 	     	var subject = geemails[i].subject;
-        	var sender = geemails[i].sender;
-        	var body = geemails[i].body;
-        	date.addClass('date');
-        	subject.addClass('subject');
-        	sender.addClass('sender');
-        	body.addClass('body');
+
+        //Helper functions
+        function getDate(obj) {
+          return obj.date;
         }
-        **/
-    });
+        function getSubject(obj) {
+          return obj.subject;
+        }
+        function getSender(obj) {
+          return obj.sender;
+        }
+        function getBody(obj) {
+          return obj.body;
+        }
+
+        //Assembles Date, Subject, and Sender to be in overall format
+        function asmMessageInfo(obj) {
+          date = getDate(obj);
+          subject = getSubject(obj);
+          sender = getSender(obj);
+          msgInfo = '<div class="row">' + '<div class="column column1 sender">' + sender + '</div>' + '<div class="column column1 subject">' + subject + '</div>' + '<div class="column column1 date">' + date + '</div>' + '<button class="column buttonColumn" onclick="showMessage()">Show MSG' + '</button>' + '<div>';
+          return msgInfo;
+        }
+
+        //Populates page with initial messages;
+        for (var i = 0; i < geemails.length; i++) {
+          message = asmMessageInfo(geemails[i]);
+          document.getElementById("main").innerHTML += message;
+        }
+        count = document.getElementById("count").innerHTML = "Inbox: (" + geemails.length + ") Messages";
+
+        //This will prepend messages
+        setInterval(function() {
+          container = document.getElementById("main");
+          rawMSG = getNewMessage();
+          forMSG = document.createElement("div");
+          forMSG.innerHTML = asmMessageInfo(rawMSG);
+          container.insertBefore(forMSG, container.firstChild);
+          geemails.push(rawMSG);
+          document.getElementById("count").innerHTML = "Inbox: (" + geemails.length + ") Messages";
+        },60000)
+    }
     </script>
 	</head>
 	<body>
 		<header id="top Header"> 
 			<h1>Gee-Mail</h1>
+      <div id="count">
+      </div>
 		</header>
 		<div class="container" id="main">
-			<div id="message">
-				<div class="date">
-					<p>Date</p>
-				</div>
-				<div class="subject">
-					<p>Subject</p>
-				</div>
-				<div id="sender">
-					<p>Sender</p>
-				</div>
-				<div id="body">
-					<p>Body</p>
-				</div>
-			</div>
-
 		</div>
 	</body>
 </html>
