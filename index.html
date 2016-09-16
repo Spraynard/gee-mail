@@ -22,31 +22,66 @@
         }
 
         //Assembles Date, Subject, and Sender to be in overall format
-        function asmMessageInfo(obj) {
+        function asmMessage(obj) {
           date = getDate(obj);
           subject = getSubject(obj);
           sender = getSender(obj);
-          msgInfo = '<div class="row">' + '<div class="column column1 sender">' + sender + '</div>' + '<div class="column column1 subject">' + subject + '</div>' + '<div class="column column1 date">' + date + '</div>' + '<button class="column buttonColumn" onclick="showMessage()">Show MSG' + '</button>' + '<div>';
+          body = getBody(obj);
+          msgInfo = '<div class="message row">' + '<div class="column column1 sender">From: ' + sender + '</div>' + '<div class="column column1 subject">' + subject + '</div>' + '<div class="column column1 date">' + date + '</div>' + '<div class="body row">' + '<div class="column column2 msgBody">' +  body + '</div>' + '</div>' + '</div>'
           return msgInfo;
         }
 
         //Populates page with initial messages;
         for (var i = 0; i < geemails.length; i++) {
-          message = asmMessageInfo(geemails[i]);
+          message = asmMessage(geemails[i]);
           document.getElementById("main").innerHTML += message;
         }
         count = document.getElementById("count").innerHTML = "Inbox: (" + geemails.length + ") Messages";
 
-        //This will prepend messages
+        //This will prepend messages and update message count
         setInterval(function() {
           container = document.getElementById("main");
           rawMSG = getNewMessage();
-          forMSG = document.createElement("div");
-          forMSG.innerHTML = asmMessageInfo(rawMSG);
+          console.log(rawMSG);
+          forMSG = document.createElement('div');
+          forMSG.className = "newMSG";
+          forMSG.innerHTML = asmMessage(rawMSG);
           container.insertBefore(forMSG, container.firstChild);
+          //adds push event
+          addMsgShowEventByClassName("newMSG");
+          //counter
           geemails.push(rawMSG);
           document.getElementById("count").innerHTML = "Inbox: (" + geemails.length + ") Messages";
         },60000)
+
+        //Finally, this allows messages to be shown based on clicking the message information row by attaching event listeners to each row
+        function addMsgShowEventByClassName(className) {
+          var messages = document.getElementsByClassName(className);
+          for (var j = 0; j < messages.length; j++) {
+            messages[j].addEventListener('click', displayMessage);
+          }
+        }
+
+        addMsgShowEventByClassName("message");
+
+        function displayMessage(event) {
+          var sender = this.querySelectorAll('.sender')[0];
+          var subject = this.querySelectorAll('.subject')[0];
+          var date = this.querySelectorAll('.date')[0];
+          var body = this.querySelectorAll('.body')[0];
+          if (body.style.display === 'none') {
+            body.style.display = 'block';
+            sender.style.borderStyle = 'solid none none solid';
+            subject.style.borderStyle = 'solid none none none';
+            date.style.borderStyle = 'solid solid none none';
+          }
+          else {
+            body.style.display = 'none';
+            sender.style.borderStyle = 'solid none solid solid';
+            subject.style.borderStyle = 'solid none solid none';
+            date.style.borderStyle = 'solid solid solid none';
+          }
+        }
     }
     </script>
 	</head>

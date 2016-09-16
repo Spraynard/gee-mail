@@ -1,5 +1,3 @@
-.container {
-}
 
 .row, .column {
 	box-sizing:border-box;
@@ -9,6 +7,7 @@
 .row:after {
 	content = "";
 	display: table;
+	background: blue;
 }
 
 .row:after {
@@ -21,22 +20,54 @@
 	float: left;
 }
 
-.column + .column {
-	margin-left: 2.0%;
-}
-
 .column1 {
-	width: 25%;
-}
-
-.btnColumn {
-	width: 5%;
+	width: 33.33%;
 }
 
 .column2 {
 	width: 100%;
 }
 
-#msgbody {
-	text-align:center;
+.body { 
+	text-align: center;
+	display: none;
+}
+
+.container {
+	padding: 20px;
+}
+
+body {
+	background: #f6b6ff;
+}
+
+header {
+	font-family: "Arial";
+}
+.column {
+	background: #ccffb3
+}
+
+.date {
+	border: 1px solid black;
+	border-left: none;
+	text-align: right;
+}
+
+.sender {
+	border: 1px solid black;
+	border-right: none;
+	text-align: left;
+}
+
+.subject {
+	border: 1px solid black;
+	border-left: none;
+	border-right: none;
+}
+
+.msgBody {
+	border: 1px solid black;
+	border-top: none;
+	padding: 50px;
 }
