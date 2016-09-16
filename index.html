@@ -38,7 +38,7 @@
         }
         count = document.getElementById("count").innerHTML = "Inbox: (" + geemails.length + ") Messages";
 
-        //This will prepend messages and update message count
+        //This will prepend messages and update message count. Updates every minute.
         setInterval(function() {
           container = document.getElementById("main");
           rawMSG = getNewMessage();
@@ -47,7 +47,7 @@
           forMSG.className = "newMSG";
           forMSG.innerHTML = asmMessage(rawMSG);
           container.insertBefore(forMSG, container.firstChild);
-          //adds push event
+          //adds push event to the new messages
           addMsgShowEventByClassName("newMSG");
           //counter
           geemails.push(rawMSG);
@@ -61,9 +61,10 @@
             messages[j].addEventListener('click', displayMessage);
           }
         }
-
+        //adds to the initial messages
         addMsgShowEventByClassName("message");
-
+        
+	//Message display function accessed by clicking  a row. Also does some nice CSS stuff
         function displayMessage(event) {
           var sender = this.querySelectorAll('.sender')[0];
           var subject = this.querySelectorAll('.subject')[0];
@@ -88,8 +89,8 @@
 	<body>
 		<header id="top Header"> 
 			<h1>Gee-Mail</h1>
-      <div id="count">
-      </div>
+      			<div id="count">
+      			</div>
 		</header>
 		<div class="container" id="main">
 		</div>
