@@ -23,11 +23,11 @@
 
         //Assembles Date, Subject, and Sender to be in overall format
         function asmMessage(obj) {
-          date = getDate(obj);
-          subject = getSubject(obj);
-          sender = getSender(obj);
-          body = getBody(obj);
-          msgInfo = '<div class="message row">' + '<div class="column column1 sender">From: ' + sender + '</div>' + '<div class="column column1 subject">' + subject + '</div>' + '<div class="column column1 date">' + date + '</div>' + '<div class="body row">' + '<div class="column column2 msgBody">' +  body + '</div>' + '</div>' + '</div>'
+          d = getDate(obj);
+          sub= getSubject(obj);
+          send = getSender(obj);
+          b = getBody(obj);
+          msgInfo = '<div class="message row">' + '<div class="column column1 sender">From: ' + send + '</div>' + '<div class="column column1 subject">' + sub + '</div>' + '<div class="column column1 date">' + d + '</div>' + '<div class="body row">' + '<div class="column column2 msgBody">' +  b + '</div>' + '</div>' + '</div>'
           return msgInfo;
         }
 
